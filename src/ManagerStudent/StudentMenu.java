@@ -71,10 +71,6 @@ public class StudentMenu  {
                 System.out.printf("%-30s", rsetMD.getColumnName(i));
             }
             System.out.println();
-            for(int i = 1; i <= numColumns; ++i){
-                System.out.printf("%-30s","(" + rsetMD.getColumnClassName(i) + ")");
-            }
-            System.out.println();
             int rowCount = 0;
             while (rset.next()){
                 for(int i = 1; i <= numColumns; ++i){
