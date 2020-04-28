@@ -19,6 +19,7 @@ public class StudentMenu  {
                 ViewStudent();
                 break;
             case 3:
+                SaveRecord();
                 break;
             case 4:
                 System.out.println("Exit....");
@@ -89,6 +90,22 @@ public class StudentMenu  {
 
         }catch (SQLException ex){
             ex.printStackTrace();
+        }
+    }
+    public static void SaveRecord(){
+        Student students = new Student();
+        Scanner scanner = new Scanner(System.in);
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/list_students?" +
+                        "&serverTimezone=UTC" +
+                        "&useSSL=false" +
+                        "&allowPublicKeyRetrieval=true",
+                "root",
+                "");
+             Statement stmt = connection.createStatement();
+        ) {
+            stmt.executeUpdate("INSERT INTO students VALUES ('" + students.getStudentID() + "', '" + students.getName() + "', '" + students.getAddress() + "', " + students.getPhone() + " )" );
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
