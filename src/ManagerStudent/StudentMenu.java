@@ -59,13 +59,10 @@ public class StudentMenu  {
     private static void ViewStudent(){
         try(
                 Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/list_students?" +
-                                "&serverTimezone=UTC" +
-                                "&useSSL=false" +
-                                "&allowPublicKeyRetrieval=true",
-                        "root",
-                        "");
+                        "jdbc:mysql://localhost:3306/list_students?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+                        "root", "");
                 Statement stmt = conn.createStatement();
+
         ){
             ResultSet rset = stmt.executeQuery("select * from students");
             ResultSetMetaData rsetMD = rset.getMetaData();
@@ -95,13 +92,10 @@ public class StudentMenu  {
     public static void SaveRecord(){
         Student students = new Student();
         Scanner scanner = new Scanner(System.in);
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/list_students?" +
-                        "&serverTimezone=UTC" +
-                        "&useSSL=false" +
-                        "&allowPublicKeyRetrieval=true",
-                "root",
-                "");
-             Statement stmt = connection.createStatement();
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/list_students?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+                "root", "");
+             Statement stmt = conn.createStatement();
         ) {
             stmt.executeUpdate("INSERT INTO students VALUES ('" + students.getStudentID() + "', '" + students.getName() + "', '" + students.getAddress() + "', " + students.getPhone() + " )" );
         } catch (SQLException e) {
